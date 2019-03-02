@@ -56,9 +56,17 @@ function render_page(json) {
     }
 
     console.log("===================================");
+
+    let patientsString = "";
+    let delim = "";
+
     for (j = 0; j < patients[i].people.length; j++) {
-      console.log(patients[i].people[j]);
+      if (j > 0) {
+        delim = ", ";
+      }
+      patientsString = patientsString + delim + patients[i].people[j];
     }
+    console.log(patientsString);
   }
 }
 
