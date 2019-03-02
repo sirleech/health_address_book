@@ -15,12 +15,12 @@ function render_page(json) {
   for (i = 0; i < 11 ; i++) {
     patients[i] = new Object();
     patients[i].wardNumber = i;
-    patients[i].wardPhoneNumber = "";
+    patients[i].wardPhoneNumber = null;
     patients[i].people = new Array();
 
     nurses[i] = new Object();
     nurses[i].wardNumber = i;
-    nurses[i].wardPhoneNumber = "";
+    nurses[i].wardPhoneNumber = null;
     nurses[i].people = new Array();
   }
 
@@ -45,11 +45,33 @@ function render_page(json) {
   console.log("PATIENTS LIST:");
   // render patients list
   for (i = 0; i < patients.length; i++) {
-    console.log("WARD # " + patients[i].wardNumber);
-    console.log(patients[i].wardPhoneNumber);
+    console.log("");
+    if (i == 0) {
+      console.log("NO WARD");
+    } else {
+      console.log("WARD # " + patients[i].wardNumber);
+    }
+    if (patients[i].wardPhoneNumber != null) {
+      console.log(patients[i].wardPhoneNumber);
+    }
+
     console.log("===================================");
     for (j = 0; j < patients[i].people.length; j++) {
       console.log(patients[i].people[j]);
     }
   }
 }
+
+
+// override console log so that it goes to HTML
+(function () {
+    var old = console.log;
+    var logger = document.getElementById('log');
+    console.log = function (message) {
+        if (typeof message == 'object') {
+            logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
+        } else {
+            logger.innerHTML += message + '<br />';
+        }
+    }
+})();
