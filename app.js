@@ -25,6 +25,8 @@ function render_page(json) {
   }
 
   for (i = 0; i < json.length; i++) {
+
+    // store patients and group into wards
     if (json[i].class == "Patient") {
       if (json[i].ward_number != null) {
         patients[json[i].ward_number].people.push(json[i].first_name + " " + json[i].family_name);
@@ -32,11 +34,20 @@ function render_page(json) {
         patients[0].people.push(json[i].first_name + " " + json[i].family_name);
       }
     }
+
+    // store ward phone numbers
+    if (json[i].class == "Ward") {
+      let wardNumber = json[i].ward_number;
+      patients[wardNumber].wardPhoneNumber = json[i].phone_number;
+    }
   }
 
+  console.log("PATIENTS LIST:");
   // render patients list
   for (i = 0; i < patients.length; i++) {
-    console.log(patients[i].wardNumber);
+    console.log("WARD # " + patients[i].wardNumber);
+    console.log(patients[i].wardPhoneNumber);
+    console.log("===================================");
     for (j = 0; j < patients[i].people.length; j++) {
       console.log(patients[i].people[j]);
     }
