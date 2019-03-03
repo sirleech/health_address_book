@@ -76,6 +76,7 @@ function render_page(json) {
       console.log(patients[i].wardPhoneNumber);
     }
     console.log("===================================");
+    console.log(patients[i].people.length  +" people");
     let patientsString = "";
     let delim = "";
     for (j = 0; j < patients[i].people.length; j++) {
@@ -104,6 +105,7 @@ function render_page(json) {
       console.log(nurses[i].wardPhoneNumber);
     }
     console.log("===================================");
+    console.log(nurses[i].people.length  +" people");
 
     let nursesString = "";
     delim = "";
@@ -120,11 +122,17 @@ function render_page(json) {
 
   //render Doctors list
   console.log("");console.log("");console.log("");console.log("");
-  console.log("🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥");
+  console.log("👩👩👩👩👩👩👩👩👩👩👩👩👩👩👩👩👩👩👩‍⚕️");
   console.log("DOCTORS LIST:");
   console.log("🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥");
 
-  console.log(doctors);
+  console.log(doctors.length  +" people");
+
+  let doctorsString = "";
+  delim = "";
+  for (i = 0; i < doctors.length ; i ++) {
+    console.log(doctors[i].name + "----  ph: " + doctors[i].phoneNumber);
+  }
 
 
 }
