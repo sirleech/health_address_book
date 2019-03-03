@@ -44,6 +44,14 @@ function render_page(json) {
       }
     }
 
+    // store Doctors
+    if (json[i].class == "Doctor") {
+      let doctor = new Object();
+      doctor.name = json[i].first_name + " " + json[i].family_name;
+      doctor.phoneNumber = json[i].phone_number;
+      doctors.push(doctor);
+    }
+
     // store ward phone numbers
     if (json[i].class == "Ward") {
       let wardNumber = json[i].ward_number;
@@ -79,9 +87,8 @@ function render_page(json) {
     console.log(patientsString);
   }
 
-  console.log("");console.log("");console.log("");console.log("");
-
   //render Nurses list
+  console.log("");console.log("");console.log("");console.log("");
   console.log("🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥");
   console.log("NURSES LIST:");
   console.log("🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥");
@@ -111,6 +118,13 @@ function render_page(json) {
     console.log(nursesString);
   }
 
+  //render Doctors list
+  console.log("");console.log("");console.log("");console.log("");
+  console.log("🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥");
+  console.log("DOCTORS LIST:");
+  console.log("🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥");
+
+  console.log(doctors);
 
 
 }
