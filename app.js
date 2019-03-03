@@ -35,15 +35,28 @@ function render_page(json) {
       }
     }
 
+    // store nurses and group into wards
+    if (json[i].class == "Nurse") {
+      if (json[i].ward_number != null) {
+        nurses[json[i].ward_number].people.push(json[i].first_name + " " + json[i].family_name);
+      } else {
+        nurses[0].people.push(json[i].first_name + " " + json[i].family_name);
+      }
+    }
+
     // store ward phone numbers
     if (json[i].class == "Ward") {
       let wardNumber = json[i].ward_number;
       patients[wardNumber].wardPhoneNumber = json[i].phone_number;
+      nurses[wardNumber].wardPhoneNumber = json[i].phone_number;
     }
   }
 
-  console.log("PATIENTS LIST:");
   // render patients list
+  console.log("🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥");
+  console.log("PATIENTS LIST:");
+  console.log("🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥");
+
   for (i = 0; i < patients.length; i++) {
     console.log("");
     if (i == 0) {
@@ -54,12 +67,9 @@ function render_page(json) {
     if (patients[i].wardPhoneNumber != null) {
       console.log(patients[i].wardPhoneNumber);
     }
-
     console.log("===================================");
-
     let patientsString = "";
     let delim = "";
-
     for (j = 0; j < patients[i].people.length; j++) {
       if (j > 0) {
         delim = ", ";
@@ -68,6 +78,41 @@ function render_page(json) {
     }
     console.log(patientsString);
   }
+
+  console.log("");console.log("");console.log("");console.log("");
+
+  //render Nurses list
+  console.log("🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥");
+  console.log("NURSES LIST:");
+  console.log("🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥🏥");
+
+  for (i = 0; i < nurses.length; i++) {
+    console.log("");
+    if (i == 0) {
+      console.log("NO WARD");
+    } else {
+      console.log("WARD # " + nurses[i].wardNumber);
+    }
+    if (nurses[i].wardPhoneNumber != null) {
+      console.log(nurses[i].wardPhoneNumber);
+    }
+    console.log("===================================");
+
+    let nursesString = "";
+    delim = "";
+
+    for (j = 0; j < nurses[i].people.length; j++) {
+      // console.log(nurses[i].people[j]);
+      if (j > 0) {
+        delim = ", ";
+      }
+      nursesString = nursesString + delim + nurses[i].people[j];
+    }
+    console.log(nursesString);
+  }
+
+
+
 }
 
 
